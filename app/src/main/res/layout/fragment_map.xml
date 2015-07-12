@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bupt.wifimap.MapFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RadioGroup
+        android:id="@+id/MapRadio"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/WifiButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="BUPT-2"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/GSMButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSM"
+            />
+
+        </RadioGroup>
+
+    <WebView
+        android:id="@+id/showMap"
+        android:layout_below="@+id/MapRadio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

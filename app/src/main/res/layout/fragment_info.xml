@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.bupt.wifimap.InfoFragment">
+
+    <android.support.v4.view.ViewPager
+    android:id="@+id/viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/console_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/tab_group"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tab_widget_background"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingTop="2.0dip" >
+
+            <RadioButton
+                android:id="@+id/tab_telephone"
+                style="@style/tab_bottom"
+                android:checked="true"
+                android:text="系统信息" />
+
+            <RadioButton
+                android:id="@+id/tab_location"
+                style="@style/tab_bottom"
+                android:text="地理位置" />
+
+            <RadioButton
+                android:id="@+id/tab_signal"
+                style="@style/tab_bottom"
+                android:text="手机信号" />
+
+        </RadioGroup>
+    </LinearLayout>
+</RelativeLayout>
