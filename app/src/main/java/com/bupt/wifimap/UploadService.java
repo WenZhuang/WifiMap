@@ -53,72 +53,8 @@ public class UploadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String res = doPost(serverUrl);
+        String res = HttpUtils.doPost(this,serverUrl);
         System.out.println(res);
-    }
-
-    /**
-     * 用Post方式跟服务器传递数据
-     *
-     * @param url
-     * @return
-     */
-
-    private String doPost(String url) {
-        String responseStr = "Fail";
-        try {
-            HttpPost httpRequest = new HttpPost(url);
-            HttpParams params = new BasicHttpParams();
-            ConnManagerParams.setTimeout(params, 1000); // 从连接池中获取连接的超时时间
-            HttpConnectionParams.setConnectionTimeout(params, 3000);// 通过网络与服务器建立连接的超时时间
-            HttpConnectionParams.setSoTimeout(params, 5000);// 读响应数据的超时时间
-            httpRequest.setParams(params);
-            // 下面开始跟服务器传递数据，使用BasicNameValuePair
-            List<BasicNameValuePair> paramsList = new ArrayList<>();
-
-            String latitude;
-            String longitude;
-            Location location = Data.getLocation(this);
-            if(location != null) {
-                latitude = String.valueOf(location.getLatitude());
-                longitude = String.valueOf(location.getLongitude());
-            }
-            else {
-                latitude ="0.0";
-                longitude = "0.0";
-            }
-
-            paramsList.add(new BasicNameValuePair("Wifi", Data.getBuptlevel(this)));
-            paramsList.add(new BasicNameValuePair("GSM",Data.getGSMLevel(this)));
-            paramsList.add(new BasicNameValuePair("Latitude", latitude));
-            paramsList.add(new BasicNameValuePair("Longitude", longitude));
-            paramsList.add(new BasicNameValuePair("Time",Data.getTime()));
-            paramsList.add(new BasicNameValuePair("mac",Data.getMacAddress(this)));
-
-            UrlEncodedFormEntity mUrlEncodeFormEntity = new UrlEncodedFormEntity(
-                    paramsList, HTTP.UTF_8);
-            httpRequest.setEntity(mUrlEncodeFormEntity);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpClient.execute(httpRequest);
-            final int ret = httpResponse.getStatusLine().getStatusCode();
-            if (ret == HttpStatus.SC_OK) {
-                // responseStr = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
-                responseStr = "OK";
-            } else {
-                responseStr = String.valueOf(ret);
-            }
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return responseStr;
     }
 
 }
